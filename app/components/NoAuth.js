@@ -2,7 +2,7 @@ var React = require("react");
 
 var NoAuth = React.createClass({
   render: function(){
-    return <p> Non Authenticated Route </p>
+    return <p> This Route is Not Protected </p>
   }
 });
 
