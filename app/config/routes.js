@@ -6,7 +6,7 @@ var Register = require('../components/login-register/Register');
 var Login = require("../components/login-register/Login");
 var Logout = require('../components/login-register/Logout');
 var Dashboard = require('../components/secure/Dashboard');
-var NoAuth = require("../components/NoAuth");
+var Home = require("../components/Home");
 
 var routes = (
   <Route handler={Main} >
@@ -14,7 +14,7 @@ var routes = (
     <Route name="logout" handler={Logout} />
     <Route name="register" handler={Register} />
     <Route name="dashboard" handler={Dashboard} />
-    <Route name="noauth" handler={NoAuth} />
+    <Route name="home" path="/" handler={Home} />
   </Route>
 );
 

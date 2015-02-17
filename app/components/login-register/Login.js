@@ -28,12 +28,20 @@ var Login = React.createClass({
   render: function(){
     var errors = this.state.error ? <p> Error on Login </p> : '';
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label><input ref="email" placeholder="email" defaultValue="joe@example.com"/></label>
-        <label><input ref="pw" placeholder="password"/></label> (hint: password1)<br/>
-        <button type="submit">login</button>
-        {errors}
-      </form>
+      <div className="col-sm-6 col-sm-offset-3">
+        <form onSubmit={this.handleSubmit}>
+          <div className="form-group">
+            <label> Email </label>
+            <input className="form-control" ref="email" placeholder="Email"/>
+          </div>
+          <div className="form-group">
+            <label>Password</label>
+            <input ref="pw" type="password" className="form-control" placeholder="Password" />
+          </div>
+          <button type="submit" className="btn btn-primary">Login</button>
+          {errors}
+        </form>
+      </div>
     );
   }
 });

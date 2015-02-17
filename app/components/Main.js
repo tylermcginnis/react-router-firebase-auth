@@ -22,26 +22,33 @@ var Main = React.createClass({
     var loginOrOut;
     var register;
     if(this.state.loggedIn){
-      loginOrOut = <Link to="logout">Logout</Link>;
-      register = ''
+      loginOrOut = <li><Link to="logout" className="navbar-brand">Logout</Link></li>;
+      register = null
     } else {
-      loginOrOut = <Link to="login">Login</Link>;
-      register = <Link to="register"> Register </Link>
+      loginOrOut = <li><Link to="login" className="navbar-brand">Login</Link></li>;
+      register = <li><Link to="register" className="navbar-brand"> Register </Link></li>;
     }
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-sm-5 pull-right">
-            {register}
-            {loginOrOut}
-            <Link to="noauth"> Non Authenticated Page </Link>
-            <Link to="dashboard"> Dashboard </Link>
+      <span>
+        <nav className="navbar navbar-default navbar-static-top">
+          <div className="container">
+            <div className="navbar-header">
+              <Link to="home" className="navbar-brand"> PROJECT NAME </Link>
+            </div>
+            <ul className="nav navbar-nav pull-right">
+              <li><Link to="home" className="navbar-brand"> Home </Link></li>
+              <li><Link to="dashboard" className="navbar-brand"> Dashboard </Link></li>
+              {register}
+              {loginOrOut}
+            </ul>
+          </div>
+        </nav>
+        <div className="container">
+          <div className="row">
+            <RouteHandler />
           </div>
         </div>
-        <div className="row">
-          <RouteHandler />
-        </div>
-      </div>
+      </span>
     )
   }
 });
