@@ -3,16 +3,8 @@ var forge = ""; //YOUR FIREBASE URL HERE
 var ref = new Firebase(forge);
 var cachedUser = null;
 
-var formatEmailForFirebase =  function(email){
-  var key = email.replace('@', '^');
-  if(key.indexOf('.') !== -1){
-    return key.split('.').join('*');
-  }
-  return key;
-};
-
 var addNewUserToFB = function(newUser){
-  var key = formatEmailForFirebase(newUser.email);
+  var key = newUser.uid;
   ref.child('user').child(key).set(newUser);
 };
 
