@@ -1,15 +1,13 @@
 var Login = require("../components/login-register/Login");
 var firebaseUtils = require('./firebaseUtils');
 
-var Authenticated = {
-  statics: {
-    willTransitionTo: function(transition){
-      if(!firebaseUtils.isLoggedIn()){
-        Login.attemptedTransition = transition;
-        transition.redirect('login');
-      }
-    }
+function requireAuth(nextState, replace) {
+  if (!firebaseUtils.isLoggedIn()) {
+    replace({
+      pathname: '/login',
+      state: { nextPathname: nextState.location.pathname }
+    })
   }
-};
+}
 
-module.exports = Authenticated;
+module.exports = requireAuth;

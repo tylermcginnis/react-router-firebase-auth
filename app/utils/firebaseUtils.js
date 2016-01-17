@@ -1,5 +1,5 @@
 var Firebase = require('firebase');
-var forge = ""; //YOUR FIREBASE URL HERE
+var forge = "https://reactrouter-fb-auth.firebaseio.com/";
 var ref = new Firebase(forge);
 var cachedUser = null;
 

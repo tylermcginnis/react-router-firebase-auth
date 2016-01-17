@@ -1,10 +1,9 @@
 var React = require('react');
-var Router = require('react-router');
 var firebaseUtils = require('../../utils/firebaseUtils');
+
 var Login = React.createClass({
-  mixins: [Router.Navigation],
-  statics: {
-    attemptedTransition: null
+  contextTypes: {
+    router: React.PropTypes.object.isRequired
   },
   getInitialState: function(){
     return {
@@ -13,15 +12,15 @@ var Login = React.createClass({
   },
   handleSubmit: function(e){
     e.preventDefault();
-    var email = this.refs.email.getDOMNode().value;
-    var pw = this.refs.pw.getDOMNode().value;
+    var email = this.refs.email.value;
+    var pw = this.refs.pw.value;
     firebaseUtils.loginWithPW({email: email, password: pw}, function(){
-      if(Login.attemptedTransition){
-        var transition = Login.attemptedTransition;
-        Login.attemptedTransition = null;
-        transition.retry();
+      var location = this.props.location
+
+      if (location.state && location.state.nextPathname) {
+        this.context.router.replace(location.state.nextPathname)
       } else {
-        this.replaceWith('dashboard');
+        this.context.router.replace('/')
       }
     }.bind(this));
   },
@@ -29,6 +28,7 @@ var Login = React.createClass({
     var errors = this.state.error ? <p> Error on Login </p> : '';
     return (
       <div className="col-sm-6 col-sm-offset-3">
+        <h1> Login </h1>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label> Email </label>

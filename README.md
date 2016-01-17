@@ -1,7 +1,7 @@
 # Auth with React Router and Firebase
 Starter kit for authentication and protected routes with React Router and Firebase.
 
-*This might be out dated for you. Make sure you check the version numbers of React Router before going forward*
+*Using React Router 2.0.X and Firebase 2.3.X*
 
 #### Features:
 * Protected Routes with React Router
