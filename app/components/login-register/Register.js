@@ -1,5 +1,5 @@
-var React = require('react');
-var firebaseUtils = require('../../utils/firebaseUtils');
+import React, { Component } from 'react';
+import * as firebase from 'firebase';
 
 var Register = React.createClass({
   contextTypes: {
@@ -14,13 +14,12 @@ var Register = React.createClass({
     e.preventDefault();
     var email = this.refs.email.value;
     var pw = this.refs.pw.value;
-    firebaseUtils.createUser({email: email, password: pw}, function(err){
-      if(! err ){
-          this.context.router.replace('/');
-      } else {
-        this.setState({error: err});
-      }
-    }.bind(this));
+
+    // Add signup event
+    // TODO: Fazer validação de formulário
+    firebase.auth().createUserWithEmailAndPassword( email, pw )
+    .then( this.context.router.replace('/') )
+    .catch( this.setState({error: e.message}) );
   },
   render: function(){
     var errors = this.state.error ? <p> {this.state.error} </p> : '';
