@@ -1,14 +1,23 @@
-var React = require('react');
-var firebaseUtils = require('../../utils/firebaseUtils');
+import React, { Component } from 'react';
+import * as firebase from 'firebase';
 
 var Logout = React.createClass({
-  componentDidMount: function () {
-    firebaseUtils.logout();
-  },
-
-  render: function () {
-    return <p>You are now logged out</p>;
-  }
+    contextTypes: {
+        router: React.PropTypes.object.isRequired
+    },
+    getInitialState: function(){
+        return {
+            error: false
+        }
+    },
+    componentDidMount: function () {
+        firebase.auth().signOut();
+        this.setState({loggedIn: false});
+        // this.context.router.replace('/');
+    },
+    render: function () {
+        return <p>You are now logged out</p>;
+    }
 });
 
 module.exports = Logout;
