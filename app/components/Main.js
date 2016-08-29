@@ -11,9 +11,9 @@ var Main = React.createClass({
         }
     },
     componentWillMount: function() {
+        var that = this;
         firebase.auth().onAuthStateChanged(firebaseUser => {
-
-            this.setState({
+            that.setState({
                 loggedIn: (null !== firebaseUser)
             })
 
