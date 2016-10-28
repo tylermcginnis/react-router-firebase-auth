@@ -5,7 +5,7 @@ firebase.initializeApp(config);
 
 function requireAuth(nextState, replace) {
 
-    if(null === firebase.auth().currentUser) {
+    if(null === firebase.auth().email) {
         replace({
           pathname: '/login',
           state: { nextPathname: nextState.location.pathname }
