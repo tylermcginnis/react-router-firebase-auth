@@ -44,6 +44,7 @@ export default class App extends Component {
         })
       } else {
         this.setState({
+          authed: false,
           loading: false
         })
       }
@@ -74,7 +75,6 @@ export default class App extends Component {
                         style={{border: 'none', background: 'transparent'}}
                         onClick={() => {
                           logout()
-                          this.setState({authed: false})
                         }}
                         className="navbar-brand">Logout</button>
                     : <span>
