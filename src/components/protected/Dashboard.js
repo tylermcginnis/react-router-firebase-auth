@@ -4,7 +4,9 @@ export default class Dashboard extends Component {
   render () {
     return (
       <div>
-        Dashboard. This is a protected route. You can only see this if you're authed.
+      <h1> Welcome!</h1>
+      <h2> Please fill in your profile so we can instantly
+        match you with games near you! </h2>
       </div>
     )
   }
