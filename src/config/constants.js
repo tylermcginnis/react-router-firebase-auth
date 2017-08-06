@@ -1,15 +1,4 @@
-//import firebase from 'firebase'
 import * as firebase from "firebase";
-
-// Initialize Firebase
-// var config = {
-//   apiKey: "AIzaSyDrTzX0nVdFUIuBvBA0OldyjRjHmvymIls",
-//   authDomain: "add-users-to-app.firebaseapp.com",
-//   databaseURL: "https://add-users-to-app.firebaseio.com",
-//   projectId: "add-users-to-app",
-//   storageBucket: "",
-//   messagingSenderId: "593111009070"
-// };
 
 const config = {
   apiKey: "AIzaSyDrTzX0nVdFUIuBvBA0OldyjRjHmvymIls",
