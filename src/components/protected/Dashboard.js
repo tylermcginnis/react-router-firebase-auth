@@ -8,7 +8,7 @@ import createMatch from './createMatch'
 import DatePicker from 'react-datepicker'
 import moment from 'moment'
 import dateFormat from 'dateformat'
-import { ref, firebaseAuth } from '../config/constants'
+import { ref, firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/react-router-firebase-auth/src/config/constants'
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -20,7 +20,8 @@ export default class Dashboard extends Component {
       newProfile: {
         sports : null,
         age: null,
-        startDate: moment()
+        startDate: moment(),
+        formatDate: null
       }
     }
     this.handleChange = this.handleChange.bind(this);
@@ -39,20 +40,37 @@ export default class Dashboard extends Component {
     }
 
   handleChange(date){
-     this.setState({startDate: date
+
+    //console.log(formatDate)
+     this.setState({startDate: date,
+                    formatDate: date.format("MM/DD/YYYY")
      });
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
+
+
+    var sport = this.sport.value;
+    console.log(sport)
+    //var matchDay = this.formatDate.value;
+    var formatDate = this.state.formatDate
+    console.log(formatDate)
+    var skill = this.skill.value;
+    console.log(skill)
+
   firebaseAuth().onAuthStateChanged(function(user) {
 if (user) {
+  console.log(sport)
+  console.log(formatDate)
+  console.log(skill)
+
 // User is signed in.
 ref.child(`users/${user.uid}/matches`)
 .push({
-  Sport: this.sport,
-  gameDate: this.startDate,
-  Skill: this.skill
+  Sport: sport,
+  gameDate: formatDate,
+  Skill: skill
 })
 } else {
 // No user is signed in.
