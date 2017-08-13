@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
-//import { ref } from '../src/config/constants'
-//import { auth } from '../helpers/auth'
 import {BrowserRouter as Router, Route, NavLink} from 'react-router-dom'
 import {Checkbox, CheckboxGroup} from 'react-checkbox-group'
 import createMatch from './createMatch'
+import ChatRoom from './ChatRoom'
 //import DatePicker from 'react-bootstrap-date-picker'
 import DatePicker from 'react-datepicker'
 import moment from 'moment'
-import dateFormat from 'dateformat'
 import { ref, firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/react-router-firebase-auth/src/config/constants'
 
 import 'react-datepicker/dist/react-datepicker.css';
@@ -19,9 +17,9 @@ export default class Dashboard extends Component {
     this.state = {
       newProfile: {
         sports : null,
-        age: null,
         startDate: moment(),
-        formatDate: null
+        formatDate: null,
+        User: null
       }
     }
     this.handleChange = this.handleChange.bind(this);
@@ -65,6 +63,7 @@ if (user) {
   console.log(formatDate)
   console.log(skill)
 
+
 // User is signed in.
 ref.child(`users/${user.uid}/matches`)
 .push({
@@ -79,6 +78,10 @@ ref.child(`users/${user.uid}/matches`)
 }
 
   render () {
+
+    const user = firebaseAuth().currentUser.uid
+    console.log(user)
+
     return (
       <div>
       <div>
@@ -100,12 +103,21 @@ ref.child(`users/${user.uid}/matches`)
                    </div>
 
       <h2> Create a Match: </h2>
+      <div>
+      <createMatch config={user}/>
+      </div>
+      <ChatRoom config="Hello"/>
+
       <Router>
       <div>
      <li><NavLink to="/protected/createMatch">Create Match</NavLink></li>
            <Route path="/protected/createMatch" component={createMatch}/>
+           <ol id='matchlist'>
+
+           </ol>
            </div>
            </Router>
+
            <form onSubmit={this.handleSubmit}>
            <label>Sport</label>
            <div className="form-group">
