@@ -7,7 +7,7 @@ import ChatRoom from './ChatRoom'
 import DatePicker from 'react-datepicker'
 import moment from 'moment'
 import { ref, firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/react-router-firebase-auth/src/config/constants'
-
+import matchFeed from './matchFeed'
 import 'react-datepicker/dist/react-datepicker.css';
 
 export default class Dashboard extends Component {
@@ -102,11 +102,17 @@ ref.child(`users/${user.uid}/matches`)
                    <input type="submit" value="Update Profile" />
                    </div>
 
-      <h2> Create a Match: </h2>
+      <br />
+      <br />
+      <matchFeed  />
+      <li><NavLink to="/protected/matchFeed">Match Feed</NavLink></li>
+            <Route path="/protected/matchFeed" component={matchFeed}/>
+      <h3> Basic Messenger </h3>
       <div>
-      <createMatch config={user}/>
+      <createMatch />
       </div>
-      <ChatRoom config="Hello"/>
+      <ChatRoom />
+
 
       <Router>
       <div>
@@ -118,16 +124,17 @@ ref.child(`users/${user.uid}/matches`)
            </div>
            </Router>
 
+                <h2> Create a Match: </h2>
            <form onSubmit={this.handleSubmit}>
            <label>Sport</label>
            <div className="form-group">
            <select id="sport" ref={(sport) => this.sport = sport}>
            <option disabled value>Sport</option>
-           <option value="1">Tennis</option>
-           <option value="2">Badminton</option>
-           <option value="3">Basketball</option>
-           <option value="4">Soccer</option>
-           <option value="5">Softball</option>
+           <option value="Tennis">Tennis</option>
+           <option value="Badminton">Badminton</option>
+           <option value="Basketball">Basketball</option>
+           <option value="Soccer">Soccer</option>
+           <option value="Softball">Softball</option>
            </select>
 
 
@@ -147,15 +154,20 @@ ref.child(`users/${user.uid}/matches`)
            <div className="form-group">
            <select id="skill" ref={(skill) => this.skill = skill}>
            <option disabled value>Skill</option>
-           <option value="1">Beginner</option>
-           <option value="2">Intermediate</option>
-           <option value="3">Advanced</option>
+           <option value="Beginner">Beginner</option>
+           <option value="Intermediate">Intermediate</option>
+           <option value="Advanced">Advanced</option>
            </select>
-
+           <br />
+           <br />
            <button type="submit" className="btn btn-primary">Create</button>
+
+           <br />
+
 
            </div>
          </form>
+
       </div>
     )
   }

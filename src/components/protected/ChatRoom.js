@@ -71,7 +71,7 @@ export default class ChatRoom extends Component {
       <br />
       <input onChange={this.updateMessage} type="text" placeholder="Message" />
       <br />
-      <button onClick={this.submitMessage}> Message</button>
+      <button onClick={this.submitMessage}>Write a message...</button>
       </div>
 )
 }
