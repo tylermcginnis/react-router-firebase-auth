@@ -35,7 +35,8 @@ export default class Register extends Component {
       BirthMonth: month,
       BirthDay: day,
       BirthYear: year,
-      Gender: gender
+      Gender: gender,
+      JoinedGames: []
     })
   } else {
     // No user is signed in.
@@ -224,9 +225,9 @@ export default class Register extends Component {
           <div className="form-group">
           <select id="gender" ref={(gender) => this.gender = gender}>
           <option disabled value>Gender</option>
-          <option value="1">Male</option>
-          <option value="2">Female</option>
-          <option value="3">Other/Decline</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other/Decline">Other/Decline</option>
           </select>
           </div>
           {

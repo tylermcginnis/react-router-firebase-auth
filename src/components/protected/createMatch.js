@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/react-router-firebase-auth/src/config/constants'
 import * as firebase from "firebase"
 
-export default class createMatch extends Component {
+export default class CreateMatch extends Component {
 
    constructor(props, context){
     super(props, context)
@@ -18,9 +18,11 @@ export default class createMatch extends Component {
     console.log(user.uid)
     firebase.database().ref(`users/${user.uid}/matches`).on('value', (snapshot)=> {
 
-      const matchesInfo = snapshot.val()
+    //  var matchesInfo = []
+      var matchesInfo = snapshot.val()
       console.log(matchesInfo)
 
+      var keys = []
       var keys = Object.keys(matchesInfo)
           console.log(keys)
 
@@ -73,7 +75,8 @@ changeList(event){
   return (
     <li key={match.id}>{match.skill}
     {match.sport}
-    {match.date}</li>
+    {match.date}
+    </li>
   )
   })
 

@@ -5,6 +5,9 @@ import Login from './Login'
 import Register from './Register'
 import Home from './Home'
 import Dashboard from './protected/Dashboard'
+
+import matchFeed from './protected/matchFeed'
+
 import { logout } from '../helpers/auth'
 import { firebaseAuth } from '../config/constants'
 
@@ -92,6 +95,9 @@ export default class App extends Component {
                 <PublicRoute authed={this.state.authed} path='/login' component={Login} />
                 <PublicRoute authed={this.state.authed} path='/register' component={Register} />
                 <PrivateRoute authed={this.state.authed} path='/dashboard' component={Dashboard} />
+
+                <PrivateRoute authed={this.state.authed} path='/protected/matchFeed' component={matchFeed} />
+
                 <Route render={() => <h3>No Match</h3>} />
               </Switch>
             </div>

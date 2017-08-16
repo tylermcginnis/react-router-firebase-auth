@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {BrowserRouter as Router, Route, NavLink} from 'react-router-dom'
 import {Checkbox, CheckboxGroup} from 'react-checkbox-group'
-import createMatch from './createMatch'
+import CreateMatch from './createMatch'
 import ChatRoom from './ChatRoom'
 //import DatePicker from 'react-bootstrap-date-picker'
 import DatePicker from 'react-datepicker'
@@ -71,6 +71,17 @@ ref.child(`users/${user.uid}/matches`)
   gameDate: formatDate,
   Skill: skill
 })
+
+ref.child(`all_matches`)
+.push({
+  Sport: sport,
+  gameDate: formatDate,
+  Skill: skill,
+  players: [user.uid],
+  creator: user.uid
+})
+
+
 } else {
 // No user is signed in.
 }
@@ -109,7 +120,7 @@ ref.child(`users/${user.uid}/matches`)
             <Route path="/protected/matchFeed" component={matchFeed}/>
       <h3> Basic Messenger </h3>
       <div>
-      <createMatch />
+      <CreateMatch />
       </div>
       <ChatRoom />
 
@@ -117,7 +128,7 @@ ref.child(`users/${user.uid}/matches`)
       <Router>
       <div>
      <li><NavLink to="/protected/createMatch">Create Match</NavLink></li>
-           <Route path="/protected/createMatch" component={createMatch}/>
+           <Route path="/protected/createMatch" component={CreateMatch}/>
            <ol id='matchlist'>
 
            </ol>
