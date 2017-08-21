@@ -16,7 +16,8 @@ export default class CreateMatch extends Component {
     console.log('Did Mount')
     const user = firebaseAuth().currentUser
     console.log(user.uid)
-    firebase.database().ref(`users/${user.uid}/matches`).on('value', (snapshot)=> {
+  //  firebase.database().ref(`users/${user.uid}/matches`).on('value', (snapshot)=> {
+   firebase.database().ref(`matches/`).on('value', (snapshot)=> {
 
     //  var matchesInfo = []
       var matchesInfo = snapshot.val()
@@ -29,8 +30,8 @@ export default class CreateMatch extends Component {
           for (var i =0; i < keys.length; i++) {
             var k = keys[i];
           //  var match = matches[k];
-            var skill = matchesInfo[k].Skill;
-            var sport = matchesInfo[k].Sport;
+            var skill = matchesInfo[k].skill;
+            var sport = matchesInfo[k].sport;
             var date = matchesInfo[k].gameDate;
             //var li = document.createElement('li', 'Sport: ' + sport + '   Skill Level: ' + skill
             //   + '   Match Date: ' + date);

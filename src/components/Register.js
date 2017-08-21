@@ -26,7 +26,7 @@ export default class Register extends Component {
       firebaseAuth().onAuthStateChanged(function(user) {
   if (user) {
     // User is signed in.
-    ref.child(`users/${user.uid}/info`)
+    ref.child(`users/${user.uid}/personal-info`)
     .set({
       email: user.email,
       uid: user.uid,
@@ -35,9 +35,14 @@ export default class Register extends Component {
       BirthMonth: month,
       BirthDay: day,
       BirthYear: year,
-      Gender: gender,
-      JoinedGames: []
+      Gender: gender
     })
+
+    // ref.child(`users/${user.uid}/account-info`)
+    // .set({
+    //   JoinedGames: null
+    // })
+
   } else {
     // No user is signed in.
   }

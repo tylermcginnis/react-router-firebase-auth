@@ -1,49 +1,50 @@
-
 import React, { Component } from 'react'
 import * as firebase from "firebase"
 import { ref, firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/react-router-firebase-auth/src/config/constants'
-import MatchRender from "./matchRender"
-
+import MatchRender from './MatchRender'
+import ChatRoom from './ChatRoom'
 
 export default class matchFeed extends Component {
 
   constructor(props){
     super(props)
     this.state = {
-        allMatches: []
+        allMatches: [],
+        User: ''
     }
   }
-// getMatches(){
-//   let data = {}
-//   //refresh
-//   data.matches = []
-//
-//   //data.matches = firebase //get posts
-//
-//   return data
-// }
-
 
 componentDidMount(){
   console.log('Did Mount')
   const user = firebaseAuth().currentUser
-  console.log(user.uid)
+
+  this.setState({User: user})
+
+  console.log(this.state.User.uid)
   firebase.database().ref(`matches`).on('value', (snapshot)=> {
 
   //  var matchesInfo = []
-    var allMatches = snapshot.val()
-    console.log(allMatches)
+    var matches = snapshot.val()
+    console.log('allmatches')
+    console.log(matches)
 
     var keys = []
-    var keys = Object.keys(allMatches)
+    var keys = Object.keys(matches)
         console.log(keys)
 
         for (var i =0; i < keys.length; i++) {
+          //var id = matches[k].key
+          //console.log(id)
           var k = keys[i];
         //  var match = matches[k];
-          var skill = allMatches[k].Skill;
-          var sport = allMatches[k].Sport;
-          var date = allMatches[k].gameDate;
+          var skill = matches[k].skill;
+          var sport = matches[k].sport;
+          var date = matches[k].gameDate;
+          var creator_query = matches[k].creator;
+          var players = matches[k].players;
+          var creator_first_name = matches[k].creator_first_name;
+          var creator_last_name = matches[k].creator_last_name;
+        //  var thatUser =
           //var li = document.createElement('li', 'Sport: ' + sport + '   Skill Level: ' + skill
           //   + '   Match Date: ' + date);
 
@@ -56,19 +57,20 @@ componentDidMount(){
       skill: skill,
       sport: sport,
       date:  date,
-      players: [user.uid],
-      creator: user.uid
+      players: players,
+      creator: creator_query,
+      creatorName: creator_first_name + " " + creator_last_name
     }
     console.log('nextMatch')
     console.log(nextMatch)
 
-    var matchList = this.state.allMatches.slice()
+    var allMatches = this.state.allMatches.slice()
     console.log('allList')
-    console.log(matchList)
+    console.log(allMatches)
 
-    matchList.push(nextMatch)
-    this.setState({ matchList: matchList })
-    console.log(matchList)
+    allMatches.push(nextMatch)
+    this.setState({ allMatches: allMatches})
+    console.log(allMatches)
     console.log('pushed')
 }
 
@@ -78,86 +80,27 @@ componentDidMount(){
 
 
 
-renderjoin(e){
-  e.preventDefault()
-
-  // push user id to player field if match not made by user
-  // remove button if made by user
-  // make some 'joined' button if joined another users game
-
-
-
-
-}
-
   render(){
-    var posts = this.allMatches.map(function(record){
-      return <MatchRender key={record.id} match={record}/>
+    console.log('This.state.User')
+    console.log(this.state.User)
+    console.log('this.state.allMatches')
+    console.log(this.state.allMatches)
+    var posts = this.state.allMatches.map(function(record){
+      return <MatchRender key={record.id} match={record} />
 
-    })
+    //  var messages = this.
+   })
+  console.log('testpost')
+  var testpost = this.state.allMatches
+  //console.log('testpost')
+  console.log(testpost)
 
     return(
 
-      // <div className="col-sm-9">
-      //                          <Statusform/>
-      //                          {posts}
-      //                          <button onClick={this.addMore}
-      //                                  className="btn btn-lg">More</button>13
-      //                      </div>
-      //
-
-        //switch logic:
-
-      // if match.creator === user.uid
-      //     render "your match"
-      // defult null
-
-      // if match.players.exists???(user.uid)
-            //  render button that says " Joined! "
-      //
-      //   if not in joined players and players.length < max length for sport:
-      //   render "Join match" button
-
-      // if reached max player capacity:
-      // Render "Match Full" or remove from list.
-
-      {posts}
-      // <div className="col-sm-12">
-      //   <div className="panel panel-white post panel-shadow">
-      //     <div className="post-heading">
-      //       <div className="pull-left image">
-      //         <img className="img-circle avatar" src="http://placehold.it/48x48" alt=""/>
-      //         Avatar
-      //       </div>
-      //       <div className="pull-left meta">
-      //         <div className="title h5">
-      //         <b> {user.FirstName} {user.LastName} </b>
-      //         made a match
-      //         </div>
-      //         <h6 className="text-muted time">An hour ago</h6>
-      //         </div>
-      //       </div>
-      //     </div>
-      //     <div className="col-md-12 post-description">
-      //       <h3> {this.props.sport} !</h3>
-      //       <br/>
-      //       <h3> {this.props.skill} !</h3>
-      //       <br/>
-      //       <h3> {this.props.date} !</h3>
-      //       <br/>
-      //       <h3> {this.props.JoinedGames.length} !</h3>
-      //       <br/>
-      //       </div>
-      //       <div className="actions">
-      //         <a href="#" className="btn btn-default stat-item"></a>
-      //
-      //         <a onClick={this.handleChange}  href="#" className="btn btn-default stat-item">
-      //                          <i className="fa fa-thumbs-up icon"></i>
-      //                      </a>
-      //                      &nbsp;{this.joinRender(       )}
-      //   </div>
-      // </div>
-
+       <div>  Local Matches
+       { posts }
+       
+          </div>
 
 )
 }
