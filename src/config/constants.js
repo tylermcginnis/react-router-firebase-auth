@@ -1,12 +1,15 @@
-import firebase from 'firebase'
+import * as firebase from "firebase";
 
 const config = {
-  apiKey: "AIzaSyDHL6JFTyBcaV60WpE4yXfeO0aZbzA9Xbk",
-  authDomain: "practice-auth.firebaseapp.com",
-  databaseURL: "https://practice-auth.firebaseio.com",
+  apiKey: "AIzaSyDrTzX0nVdFUIuBvBA0OldyjRjHmvymIls",
+  authDomain: "add-users-to-app.firebaseapp.com",
+  databaseURL: "https://add-users-to-app.firebaseio.com",
+  projectId: "add-users-to-app",
+  storageBucket: "",
+  messagingSenderId: "593111009070"
 }
 
-firebase.initializeApp(config)
+firebase.initializeApp(config);
 
-export const ref = firebase.database().ref()
-export const firebaseAuth = firebase.auth
+export const ref = firebase.database().ref();
+export const firebaseAuth = firebase.auth;
